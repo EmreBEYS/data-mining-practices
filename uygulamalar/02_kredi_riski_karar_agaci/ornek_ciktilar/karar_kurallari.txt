@@ -1,0 +1,13 @@
+|--- gelir <= 40500.00
+|   |--- gelir <= 30500.00
+|   |   |--- class: yuksek
+|   |--- gelir >  30500.00
+|   |   |--- yas <= 44.50
+|   |   |   |--- class: orta
+|   |   |--- yas >  44.50
+|   |   |   |--- class: orta
+|--- gelir >  40500.00
+|   |--- yas <= 50.00
+|   |   |--- class: dusuk
+|   |--- yas >  50.00
+|   |   |--- class: dusuk
