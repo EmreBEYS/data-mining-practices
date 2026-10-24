@@ -1,41 +1,118 @@
 # Veri Madenciliği Ders Uygulamaları
 
-Bu depo, veri madenciliğinin temel sınıflandırma ve karar ağacı konularını Python ile uygulamalı biçimde incelemek için hazırlanmıştır. Her uygulama bağımsız çalışır, sabit bir rastgelelik tohumu kullanır ve elde ettiği sonuçları belirtilen klasöre kaydeder.
+Bu depo, **Veri Madenciliği** dersi kapsamında işlenen temel algoritmaların, matematiksel yöntemlerin ve makine öğrenmesi tekniklerinin hem teorik hem de uygulamalı biçimde incelenmesi amacıyla hazırlanmıştır.
+
+Çalışmalar; elle çözülen sayısal problemleri, Python uygulamalarını, algoritma karşılaştırmalarını ve elde edilen sonuçların değerlendirilmesini içermektedir.
 
 ## İçerik
 
-| No | Uygulama | Öğrenme amacı |
+### 1. Python Uygulamaları
+
+| No | Uygulama | Öğrenme Amacı |
 |---:|---|---|
-| 1 | [Entropi ve bilgi kazancı](uygulamalar/01_entropi_bilgi_kazanci/README.md) | Entropiyi ve kategorik özniteliklerin bilgi kazancını sıfırdan hesaplamak |
-| 2 | [Kredi riski karar ağacı](uygulamalar/02_kredi_riski_karar_agaci/README.md) | Kategorik ve sayısal verilerle karar ağacı kurmak ve görselleştirmek |
-| 3 | [Iris eğitim-test ve confusion matrix](uygulamalar/03_iris_egitim_test_confusion_matrix/README.md) | Stratified veri bölme, model değerlendirme ve hata matrisi üretmek |
-| 4 | [Sayısal örneği doğrulama](uygulamalar/04_sayisal_ornek_dogrulama/README.md) | Elle çözülen entropi, bilgi kazancı ve Gini azalmasını kodla doğrulamak |
+| 01 | [Entropi ve Bilgi Kazancı](uygulamalar/01_entropi_bilgi_kazanci/README.md) | Entropi ve bilgi kazancını sıfırdan hesaplamak |
+| 02 | [Kredi Riski Karar Ağacı](uygulamalar/02_kredi_riski_karar_agaci/README.md) | Kategorik ve sayısal verilerle karar ağacı oluşturmak |
+| 03 | [Iris Eğitim-Test ve Confusion Matrix](uygulamalar/03_iris_egitim_test_confusion_matrix/README.md) | Model eğitimi, sınıflandırma ve hata matrisi oluşturmak |
+| 04 | [Sayısal Örnek Doğrulama](uygulamalar/04_sayisal_ornek_dogrulama/README.md) | Elle hesaplanan entropi, bilgi kazancı ve Gini değerlerini Python ile doğrulamak |
+
+### 2. Mini Problemler — Elle Çözüm
+
+Bu bölümde algoritmaların matematiksel temelleri küçük veri kümeleri üzerinde adım adım incelenmektedir.
+
+| No | Mini Problem | Kullanılan Yöntem | Sonuç |
+|---:|---|---|---|
+| 01 | [Gini ile Sınav Başarısı](mini_problemler/01_gini/README.md) | Gini İndeksi | Ağırlıklı Gini = 0,375 |
+| 02 | [Twoing ile İş Memnuniyeti](mini_problemler/02_twoing/README.md) | Twoing Kriteri | Twoing = 0,64 |
+| 03 | [KNN ile Öğrenci Başarı Tahmini](mini_problemler/03_knn/README.md) | KNN, Öklid Uzaklığı | GEÇTİ |
+| 04 | [Normal KNN ve Ağırlıklı KNN](mini_problemler/04_weighted_knn/README.md) | KNN, Weighted KNN | HAYIR / EVET |
+
+*Not: Twoing sonucu, ders örneğinde kullanılan formül tanımına göredir.*
+
+## Kullanılan Algoritmalar
+
+### Karar Ağacı Algoritmaları
+
+**Entropi**
+
+Bir veri kümesindeki belirsizliği ölçer.
+
+$$
+H(S)=-\sum_{i=1}^{k}p_i\log_2(p_i)
+$$
+
+**Bilgi Kazancı**
+
+Bir özelliğe göre bölünmenin belirsizliği ne kadar azalttığını ölçer.
+
+$$
+IG(S,A)=H(S)-\sum_v\frac{|S_v|}{|S|}H(S_v)
+$$
+
+**Gini İndeksi**
+
+Bir veri kümesinin sınıfsal safsızlığını hesaplar.
+
+$$
+Gini(S)=1-\sum_{i=1}^{k}p_i^2
+$$
+
+**Twoing Kriteri**
+
+İki alt grubun sınıf dağılımlarındaki farklılığı değerlendirir.
+
+Ders örneklerinde kullanılan biçimi:
+
+$$
+\Phi=2P_LP_R\sum_j|P(j|L)-P(j|R)|
+$$
+
+### K-En Yakın Komşu (KNN)
+
+KNN, yeni bir örneği en yakın komşularının sınıflarına göre sınıflandırır.
+
+**Öklid Uzaklığı**
+
+$$
+d(x,y)=\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}
+$$
+
+**Ağırlıklı KNN**
+
+Yakın komşulara daha fazla önem vermek için uzaklığın karesiyle ters orantılı ağırlık kullanılabilir.
+
+$$
+w_i=\frac{1}{d_i^2}
+$$
+
+Bu formül pozitif uzaklıklar için geçerlidir. Sıfır uzaklık durumları ayrıca ele alınmalıdır.
 
 ## Kurulum
 
-Python 3.10 veya daha yeni bir sürüm önerilir.
+Python 3.10 veya üzeri önerilir.
+
+Depoyu bilgisayarınıza aldıktan sonra ana dizinde sanal ortam oluşturun:
 
 ```bash
 python -m venv .venv
 ```
 
-Windows PowerShell:
+**Windows PowerShell**
 
 ```powershell
 .venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 ```
 
-macOS / Linux:
+**macOS / Linux**
 
 ```bash
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-## Uygulamaları çalıştırma
+## Python Uygulamalarını Çalıştırma
 
-Komutları depo ana klasöründe çalıştırın:
+Komutları depo ana dizininde çalıştırın.
 
 ```bash
 python uygulamalar/01_entropi_bilgi_kazanci/app.py
@@ -44,7 +121,9 @@ python uygulamalar/03_iris_egitim_test_confusion_matrix/app.py
 python uygulamalar/04_sayisal_ornek_dogrulama/app.py
 ```
 
-Her program varsayılan olarak kendi klasörü altında `sonuclar/` oluşturur. Başka bir hedef seçmek için:
+Programlar varsayılan olarak sonuçlarını kendi `sonuclar/` klasörlerine kaydeder.
+
+Özel bir çıktı klasörü seçmek için:
 
 ```bash
 python uygulamalar/03_iris_egitim_test_confusion_matrix/app.py --output-dir kendi_sonuclarim
@@ -52,21 +131,65 @@ python uygulamalar/03_iris_egitim_test_confusion_matrix/app.py --output-dir kend
 
 ## Testler
 
+Otomatik testleri çalıştırmak için:
+
 ```bash
 python -m pytest -q
 ```
 
-Testler temel matematiksel sonuçları, oluşturulan model dosyalarını ve görselleri denetler. Örnek çalıştırma çıktıları `ornek_ciktilar/` klasörlerinde ayrıca depoya eklenmiştir.
+Testler matematiksel hesaplamaların doğruluğunu, model çıktılarının oluşturulmasını ve uygulamaların beklenen sonuçlarını kontrol etmek amacıyla hazırlanmıştır.
 
-## Kullanılan kavramlar
+## Öğrenme Hedefleri
 
-- **Entropi:** Bir sınıf dağılımındaki belirsizliği ölçer. Saf düğümde 0'dır.
-- **Bilgi kazancı:** Bölme öncesi entropi ile ağırlıklı çocuk entropileri arasındaki farktır.
-- **Gini safsızlığı:** Karar ağaçlarında sık kullanılan başka bir safsızlık ölçüsüdür.
-- **Stratified ayırma:** Eğitim ve test kümelerinde sınıf oranlarını korur.
-- **Confusion matrix (hata matrisi):** Gerçek ve tahmin edilen sınıfları karşılaştırır.
+Bu depo kapsamında aşağıdaki konuların öğrenilmesi hedeflenmektedir:
 
-## Not
+- Entropi ve bilgi kazancı hesaplamaları
+- Karar ağaçlarının çalışma mantığı
+- Gini ve Twoing bölünme kriterleri
+- KNN algoritması ve Öklid uzaklığı
+- Normal KNN ve Ağırlıklı KNN karşılaştırması
+- Eğitim ve test kümelerinin ayrılması
+- Confusion Matrix ile model değerlendirme
+- Matematiksel hesaplamaların Python ile doğrulanması
+- Algoritmaların avantaj ve dezavantajlarının incelenmesi
 
-Bu veri kümeleri eğitim amacıyla küçük ve anlaşılır tutulmuştur. Kredi riski örneği gerçek bir kredi kararı vermek için kullanılamaz; yalnızca karar ağacının çalışma biçimini gösterir.
+## Proje Yapısı
 
+```text
+Veri-Madenciligi/
+│
+├── README.md
+├── requirements.txt
+│
+├── uygulamalar/
+│   ├── 01_entropi_bilgi_kazanci/
+│   ├── 02_kredi_riski_karar_agaci/
+│   ├── 03_iris_egitim_test_confusion_matrix/
+│   └── 04_sayisal_ornek_dogrulama/
+│
+├── mini_problemler/
+│   ├── 01_gini/
+│   │   └── README.md
+│   ├── 02_twoing/
+│   │   └── README.md
+│   ├── 03_knn/
+│   │   └── README.md
+│   └── 04_weighted_knn/
+│       └── README.md
+│
+└── tests/
+```
+
+*Proje ağacındaki mini problem klasörleri önerilen düzeni göstermektedir.*
+
+## Akademik Not
+
+Bu depoda kullanılan küçük veri kümeleri eğitim ve algoritma analizi amacıyla hazırlanmıştır.
+
+Örneklerde elde edilen sonuçlar gerçek dünyadaki başarı, finansal risk veya satın alma davranışları için doğrudan güvenilir tahminler olarak değerlendirilmemelidir.
+
+Algoritmaların gerçek veri kümelerinde kullanılabilmesi için uygun veri ön işleme, model değerlendirme ve doğrulama süreçleri uygulanmalıdır.
+
+---
+
+**Veri Madenciliği Ders Uygulamaları — Teoriden Python Uygulamasına**
